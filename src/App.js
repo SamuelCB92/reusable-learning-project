@@ -4,6 +4,7 @@ import { useState } from "react";
 function App() {
   const [pokeName, setPokeName] = useState("");
   const [pokeData, setPokeData] = useState(null);
+  const [property, setProperty] = useState("");
 
   const fetchData = async () => {
     try {
@@ -22,12 +23,34 @@ function App() {
           placeholder="Ex: Gengar"
           onChange={(event) => setPokeName(event.target.value)}
         ></input>
-        <button onClick={fetchData}>Qual o tipo?</button>
-        <h2>
-          {pokeData?.types?.map((a, i) => (
-            <div key={i}>{a.type.name}</div>
-          ))}
-        </h2>
+        <button
+          onClick={() => {
+            fetchData();
+            setProperty("types");
+          }}
+        >
+          Tipo
+        </button>
+        <button
+          onClick={() => {
+            fetchData();
+            setProperty("abilities");
+          }}
+        >
+          Habilidade
+        </button>
+
+        {pokeData?.[property]?.map((item, i) => {
+          let value;
+          switch (property) {
+            case "types":
+              value = item.type.name;
+              break;
+            case "abilities":
+              value = item.ability.name;
+          }
+          return <span key={i}>{value}</span>;
+        })}
       </div>
     </>
   );
@@ -35,3 +58,4 @@ function App() {
 export default App;
 
 //Digitar nome -> nome é substituído na url -> clicar botão -> fetch url -> converter dados -> guardar dados -> apresentar dados
+//Ao clicar, define property -> property is mapped
