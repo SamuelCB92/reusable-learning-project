@@ -1,58 +1,37 @@
 import "./App.css";
 import { useState } from "react";
-import TaskButtons from "./TaskButtons";
 
 function App() {
-  const [input, setInput] = useState("");
-  const [todoList, setTodoList] = useState([]);
+  const [pokeName, setPokeName] = useState("");
+  const [pokeData, setPokeData] = useState(null);
 
-  const handleChange = (event) => {
-    setInput(event.target.value);
-  };
-
-  const addTask = () => {
-    setTodoList([...todoList, { text: input, completed: false }]);
-    setInput("");
-  };
-
-  const handleComplete = (indexToComplete) => {
-    setTodoList(
-      todoList.map((task, index) =>
-        index === indexToComplete
-          ? { ...task, completed: !task.completed }
-          : task
-      )
-    );
-  };
-
-  const handleClear = () => {
-    setTodoList([]);
-  };
-  const handleDelete = (a) => {
-    setTodoList(todoList.filter((_, index) => index !== a));
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`);
+      const data = await res.json();
+      setPokeData(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
-    <div className="App">
-      <div className="addTask">
-        <input onChange={handleChange} value={input} />
-        <button onClick={addTask}>Add Task</button>
-        <button onClick={handleClear}>Clear</button>
-        <div className="list">
-          {todoList.map((task, index) => {
-            return (
-              <TaskButtons
-                task={task}
-                handleDelete={handleDelete}
-                index={index}
-                handleComplete={handleComplete}
-              />
-            );
-          })}
-        </div>
+    <>
+      <div>
+        <input
+          placeholder="Ex: Gengar"
+          onChange={(event) => setPokeName(event.target.value)}
+        ></input>
+        <button onClick={fetchData}>Qual o tipo?</button>
+        <h2>
+          {pokeData?.types?.map((a, i) => (
+            <div key={i}>{a.type.name}</div>
+          ))}
+        </h2>
       </div>
-    </div>
+    </>
   );
 }
-
 export default App;
+
+//Digitar nome -> nome é substituído na url -> clicar botão -> fetch url -> converter dados -> guardar dados -> apresentar dados
