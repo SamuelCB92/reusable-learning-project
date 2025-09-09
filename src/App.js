@@ -1,61 +1,35 @@
 import "./App.css";
 import { useState } from "react";
+import PokemonApp from "./components/apps/pokemon-app/PokemonApp";
+import TestApp from "./components/apps/TestApp/TestApp";
 
 function App() {
-  const [pokeName, setPokeName] = useState("");
-  const [pokeData, setPokeData] = useState(null);
-  const [property, setProperty] = useState("");
+  const [currentApp, setCurrentApp] = useState("testapp");
 
-  const fetchData = async () => {
-    try {
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokeName}`);
-      const data = await res.json();
-      setPokeData(data);
-    } catch (error) {
-      console.log(error);
+  const renderApp = () => {
+    switch (currentApp) {
+      case "pokemon":
+        return <PokemonApp />;
+      case "testapp":
+        return <TestApp />;
+      default:
+        return <TestApp />;
     }
   };
 
   return (
-    <>
-      <div>
-        <input
-          placeholder="Ex: Gengar"
-          onChange={(event) => setPokeName(event.target.value)}
-        ></input>
-        <button
-          onClick={() => {
-            fetchData();
-            setProperty("types");
-          }}
-        >
-          Tipo
+    <div>
+      <nav>
+        <button className="mr-4" onClick={() => setCurrentApp("pokemon")}>
+          Pokemon
         </button>
-        <button
-          onClick={() => {
-            fetchData();
-            setProperty("abilities");
-          }}
-        >
-          Habilidade
+        <button className="mr-4" onClick={() => setCurrentApp("testapp")}>
+          Teste
         </button>
-
-        {pokeData?.[property]?.map((item, i) => {
-          let value;
-          switch (property) {
-            case "types":
-              value = item.type.name;
-              break;
-            case "abilities":
-              value = item.ability.name;
-          }
-          return <span key={i}>{value}</span>;
-        })}
-      </div>
-    </>
+      </nav>
+      {renderApp()}
+    </div>
   );
 }
-export default App;
 
-//Digitar nome -> nome é substituído na url -> clicar botão -> fetch url -> converter dados -> guardar dados -> apresentar dados
-//Ao clicar, define property -> property is mapped
+export default App;
