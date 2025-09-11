@@ -6,7 +6,7 @@ export const Navbar = () => {
       <Link to="/" className="mr-4">
         Home
       </Link>
-      <Link to="/menu" className="mr-4">
+      <Link to="/login" className="mr-4">
         Menu
       </Link>
       <Link to="/contact" className="mr-4">

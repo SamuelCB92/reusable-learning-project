@@ -62,3 +62,5 @@ function PokemonApp() {
   );
 }
 export default PokemonApp;
+
+//change fetch to axios, make a hook to fetch and other functionality
