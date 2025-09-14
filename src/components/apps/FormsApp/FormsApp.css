@@ -1,0 +1,13 @@
+.input-regular{
+  margin: 12px;
+  border-width:thin;
+  border-style: outset;
+  border-color: black;
+}
+
+.input-text{
+  margin: 12px;
+  border-width:thin;
+  border-style: outset;
+  border-color: black;
+}

@@ -1,47 +1,103 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { useState } from "react";
+import "./FormsApp.css";
 
-const Form = () => {
-  const schema = yup.object().shape({
-    fullName: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup.string().min(4).max(20).required(),
-    confirmpassword: yup
-      .string()
-      .oneOf([yup.ref("password")], "Passwords must match")
-      .required(),
+export default function Form() {
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [userContact, setUserContact] = useState({
+    username: "",
+    email: "",
+    text: "",
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
+  function handleSubmit(event) {
+    event.preventDefault();
+    const email = userContact.email;
+    const username = userContact.username;
+    if (email && !email.includes("@")) {
+      setError("Invalid email format");
+      setSuccess("");
+      return;
+    }
+    if (username.trim() === "") {
+      setError("You need a username!");
+      setSuccess("");
+      return;
+    }
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+    setError("");
+    setSuccess("Form submitted!");
+    setUserContact({
+      username: "",
+      email: "",
+      text: "",
+    });
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input type="text" placeholder="Full Name..." {...register("fullName")} />
-      <p>{errors.fullName?.message}</p>
-      <input type="text" placeholder="Email..." {...register("email")} />
-      <input
-        type="password"
-        placeholder="Password..."
-        {...register("password")}
-      />
-      <input
-        type="password"
-        placeholder="Confirm Password..."
-        {...register("confirmpassword")}
-      />
-      <input type="submit" />
+    <form onSubmit={handleSubmit} noValidate>
+      {success && <div style={{ color: "green" }}>{success}</div>}
+      <div>
+        <label>Name:</label>
+        <input
+          className="input-regular"
+          required
+          name="username"
+          type="text"
+          value={userContact.username || ""}
+          onChange={(e) =>
+            setUserContact({
+              ...userContact,
+              username: e.target.value,
+            })
+          }
+        ></input>
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input
+          className="input-regular"
+          required
+          name="email"
+          type="email"
+          value={userContact.email || ""}
+          onChange={(e) =>
+            setUserContact({
+              ...userContact,
+              email: e.target.value,
+            })
+          }
+        ></input>
+      </div>
+      {error && <div style={{ color: "red" }}>{error}</div>}
+
+      <div>
+        <label>Text:</label>
+        <textarea
+          className="input-text"
+          name="text"
+          value={userContact.text || ""}
+          onChange={(e) =>
+            setUserContact({
+              ...userContact,
+              text: e.target.value,
+            })
+          }
+        ></textarea>
+      </div>
+      <button className="input-regular" type="submit">
+        Submit
+      </button>
     </form>
   );
-};
+}
 
-export default Form;
+/*
+Task: Build a contact form with validation. It should have:
+Name, email, message fields
+Client-side validation (required fields, email format)
+Success/error messages
+Form submission handling
+Go build it. Come back when you're stuck or done.
+I won't guide you step-by-step. You know the concepts - now practice them.*/
