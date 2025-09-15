@@ -86,18 +86,9 @@ export default function Form() {
           }
         ></textarea>
       </div>
-      <button className="input-regular" type="submit">
+      <button className="button" type="submit">
         Submit
       </button>
     </form>
   );
 }
-
-/*
-Task: Build a contact form with validation. It should have:
-Name, email, message fields
-Client-side validation (required fields, email format)
-Success/error messages
-Form submission handling
-Go build it. Come back when you're stuck or done.
-I won't guide you step-by-step. You know the concepts - now practice them.*/
