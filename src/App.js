@@ -4,9 +4,10 @@ import PokemonApp from "./components/apps/PokemonApp/PokemonApp";
 import TestApp from "./components/apps/TestApp/TestApp";
 import FormsApp from "./components/apps/FormsApp/FormsApp";
 import TypeScriptApp from "./components/typescriptapps/TypeScriptApp.tsx";
+import CartApp from "./components/typescriptapps/ShoppingCartApp/CartApp";
 
 function App() {
-  const [currentApp, setCurrentApp] = useState("formsapp");
+  const [currentApp, setCurrentApp] = useState("shopcart");
 
   const renderApp = () => {
     switch (currentApp) {
@@ -18,8 +19,10 @@ function App() {
         return <FormsApp />;
       case "typescript":
         return <TypeScriptApp />;
+      case "shopcart":
+        return <CartApp />;
       default:
-        return <FormsApp />;
+        return <CartApp />;
     }
   };
 
@@ -38,6 +41,9 @@ function App() {
         <button className="mr-4" onClick={() => setCurrentApp("typescript")}>
           Typescript
         </button>
+        <button className="mr-4" onClick={() => setCurrentApp("shopcart")}>
+          ShopCart
+        </button>
       </nav>
       {renderApp()}
     </div>
@@ -49,11 +55,6 @@ export default App;
 //we installed prop-types which lets us define types for props within an object(accepts different types but indicates error), but arent using it at current version - we then moved to typescript
 
 /*Key Areas to Work On:
-🎯 1. JavaScript Syntax (High Priority)
-
-Function calls: useState() not useState[]
-Array methods: setTodos([...todos, item]) not setTodos[...todos, item]
-Method chaining: .then(data => setUser(data)) not .then(setUser(data))
 
 🎯 2. React Patterns (Medium Priority)
 
@@ -69,18 +70,30 @@ Input clearing: Reset form inputs after submission
 
 
 🚀 Your Learning Plan:
-Week 1: JavaScript Fundamentals Review
-javascript// Practice these syntax patterns daily:
-const [state, setState] = useState(initial); // () not []
-setState(newValue); // () not []
-array.filter() // for removing items
-array.map() // for transforming
-Week 2: React Patterns Practice
-Build these mini-projects:
+ Week 2: React Patterns Practice
 
-Shopping cart (add/remove items)
-Search filter (controlled input + filtering)
-User registration form (multiple controlled inputs)
+Project 1: Shopping Cart
+Focus: Add/Remove Items + State Management
+
+Add products to cart
+Remove items from cart
+Show total count/price
+Key skills: Array manipulation, immutable updates
+
+Project 2: Search Filter
+Focus: Controlled Input + Real-time Filtering
+
+Input field for search term
+Live filtering of a list as you type
+Key skills: Controlled components, array filtering
+
+Project 3: User Registration Form
+Focus: Multiple Controlled Inputs
+
+Name, email, password fields
+Form validation
+Submit handling
+Key skills: Multiple useState hooks, form patterns
 
 Week 3: useEffect Mastery
 Practice scenarios:
