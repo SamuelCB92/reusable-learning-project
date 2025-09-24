@@ -4,12 +4,13 @@
     <title>Forms test</title>
   </head>
 
-
   <body style="background-color: black; text-decoration: none; color: white;">
-
+<!--GET = get data and show it at URL; POST = send data without showing; novalidate ignores built
+in validation(should still use types for features like keyboard show on mobile, browser autofill...)
+action defines which url the form data will be submitted to(this one echoes back sent data, nice for testing) -->
     <form id="form" method="post" action="https://httpbin.org/post" novalidate>
 
-      <div>
+     <!-- <div>
         <label for="fname">first name:</label>
         <input type="text" id="fname" name="fname" placeholder="Ex: Bundonildo" required>
         <span id="error-message-fname" style="color: red;" display="none"></span>
@@ -22,27 +23,37 @@
         <input type="text" id="lname" name="lname" placeholder="Ex: Bundinha" required>
      </div>
 
+     <br> -->
+
+     <!--for on label aggregates it to an element by id-->
+     <div>
+      <label for="email">email:</label>
+      <input type="email" id="email" name="email" placeholder="email@email.com " required autofocus>
+      <span id="error-message-email" style="color: red;" display="none"></span>
+     </div>
+
      <br>
 
      <div>
-      <label for="email">email:</label>
-      <input type="email" id="email" name="email" placeholder="email@email.com " required>
-      <span id="error-message-email" style="color: red;" display="none"></span>
+      <label for="password">password:</label>
+      <input type="password" id="password" name="password" required>
+     <span id="error-message-password" style="color: red;" display="none"></span>
+
+     <span id="success-message" style="color: green;" display="none"></span>
      </div>
 
            <br>
 
-           <div>
+         <!--  <div>
             <label for="text-area">text:</label>
             <textarea id="text-area" name="text-area"></textarea>
-                 </div>
+                 </div> -->
 
                  <br>
 
                  <div>
                   <input type="submit" value="Submit Form">
-                 </div>
-
+                 </div> 
      <br>
 
      <div>
@@ -51,29 +62,73 @@
     </form>
 
     <script>
+      //declaring the variables to manipulate and associating them with html elements
       const form = document.getElementById("form");
       const email = document.getElementById("email");
-      const submitButton = document.getElementById("submit");
+      const password = document.getElementById("password");
       const errorMessage = document.getElementById("error-message-email");
-      const errorMessageFname = document.getElementById("error-message-fname");
+      //const errorMessageFname = document.getElementById("error-message-fname");
+      const errorMessagepassword = document.getElementById("error-message-password");
       const successMessage = document.getElementById("success-message");
-      
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (email.value === "") {
+      //blur is when we click off of an element("lose focus")
+      email.addEventListener('blur', () => {
+        //dataset stores multiple data related to an element(but not inherently, we dynamically create the properties); touched is when an element is 
+        // focused and then blurred(tabbed out from or clicked out of)
+  email.dataset.touched = 'true';
+  if (email.value === "") {
           errorMessage.textContent = "Email is required";
           errorMessage.style.display = "block";
         } else if(!email.value.includes("@")){
-          errorMessage.textContent = "Email is invalid";
-          errorMessage.style.display = "block";
-        } else if(fname.value === ""){
-          errorMessageFname.textContent = "Username is required";
-          errorMessageFname.style.display = "block";
-        } else {
-          successMessage.textContent = "Email is valid";
-        }
-      });
-        </script>
+  errorMessage.textContent = "Email is invalid";
+  errorMessage.style.display = "block";
+} else {
+  errorMessage.style.display = "none";
+}
+});
 
+email.addEventListener('input', () => {
+  email.dataset.dirty = 'true';
+  //dirty is when an elements value has been modified by the user
+  errorMessage.style.display = "none"
+});
+
+password.addEventListener('blur', () => {
+  password.dataset.touched = 'true';
+  if (password.value === "") {
+          errorMessagepassword.textContent = "Password is required";
+          errorMessagepassword.style.display = "block";
+        } else if(password.value.length < 8){
+  errorMessagepassword.textContent = "Password must have length 8";
+  errorMessagepassword.style.display = "block";
+} else {
+  errorMessagepassword.style.display = "none";
+}
+});
+
+password.addEventListener('input', () => {
+password.dataset.dirty = 'true';
+errorMessagepassword.style.display = "none"
+});
+      
+      form.addEventListener("submit", (e) => {
+        //preventDefault stops default form submission
+        e.preventDefault();
+        if(!password.dataset.dirty){
+  errorMessagepassword.textContent = "Password is required";
+  errorMessagepassword.style.display = "block";
+}
+if(!email.dataset.dirty){
+  errorMessage.textContent = "Email is required";
+  errorMessage.style.display = "block";
+}
+if(errorMessage.style.display === "none" && errorMessagepassword.style.display === "none"){
+successMessage.style.display = "block";
+successMessage.textContent = "Success!";
+console.log("Form data:", {email: email.value, password: password.value })
+}
+}); 
+        </script>
   </body>
 </html>
+
+

@@ -1,59 +1,56 @@
 import { useState } from "react";
 import "./FormsApp.css";
 
-export default function Form() {
-  const [success, setSuccess] = useState("");
-  const [error, setError] = useState("");
-  const [userContact, setUserContact] = useState({
-    username: "",
+export default function FormsApp() {
+  const [formData, setFormData] = useState({
     email: "",
-    text: "",
+    password: "",
   });
+
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [success, setSuccess] = useState("");
 
   function handleSubmit(event) {
     event.preventDefault();
-    const email = userContact.email;
-    const username = userContact.username;
-    if (email && !email.includes("@")) {
-      setError("Invalid email format");
+    const email = formData.email;
+    const password = formData.password;
+
+    if (!email || email.trim() === "") {
+      setError({ ...error, email: "You need an email!" });
       setSuccess("");
       return;
     }
-    if (username.trim() === "") {
-      setError("You need a username!");
+    if (email && !email.includes("@")) {
+      setError({ ...error, email: "Invalid email format" });
+      setSuccess("");
+      return;
+    }
+    if (!password || password.trim() === "") {
+      setError({ ...error, password: "You need a password!" });
+      setSuccess("");
+      return;
+    }
+
+    if (password && password.length < 6) {
+      setError({
+        ...error,
+        password: "Password must be at least 6 characters",
+      });
       setSuccess("");
       return;
     }
 
     setError("");
     setSuccess("Form submitted!");
-    setUserContact({
-      username: "",
-      email: "",
-      text: "",
-    });
   }
 
   return (
     <form onSubmit={handleSubmit} noValidate>
       {success && <div style={{ color: "green" }}>{success}</div>}
-      <div>
-        <label>Name:</label>
-        <input
-          className="input-regular"
-          required
-          name="username"
-          type="text"
-          value={userContact.username || ""}
-          onChange={(e) =>
-            setUserContact({
-              ...userContact,
-              username: e.target.value,
-            })
-          }
-        ></input>
-      </div>
-
       <div>
         <label>Email:</label>
         <input
@@ -61,33 +58,61 @@ export default function Form() {
           required
           name="email"
           type="email"
-          value={userContact.email || ""}
-          onChange={(e) =>
-            setUserContact({
-              ...userContact,
+          value={formData.email || ""}
+          onChange={(e) => {
+            setFormData({
+              ...formData,
               email: e.target.value,
-            })
-          }
+            });
+            setError({ ...error, email: "" });
+          }}
+          onBlur={() => {
+            if (formData.email && !formData.email.includes("@")) {
+              setError({ ...error, email: "Invalid email format" });
+            } else {
+              setError({ ...error, email: "" });
+            }
+          }}
         ></input>
       </div>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-
+      {error && <div style={{ color: "red" }}>{error.email}</div>}
       <div>
-        <label>Text:</label>
-        <textarea
-          className="input-text"
-          name="text"
-          value={userContact.text || ""}
-          onChange={(e) =>
-            setUserContact({
-              ...userContact,
-              text: e.target.value,
-            })
-          }
-        ></textarea>
+        <label>Password:</label>
+        <input
+          className="input-regular"
+          required
+          name="password"
+          type="password"
+          value={formData.password || ""}
+          onChange={(e) => {
+            setFormData({
+              ...formData,
+              password: e.target.value,
+            });
+            setError({ ...error, password: "" });
+          }}
+          onBlur={() => {
+            if (formData.password && formData.password.length < 6) {
+              setError({
+                ...error,
+                password: "Password must be at least 6 characters",
+              });
+            } else {
+              setError({ ...error, password: "" });
+            }
+          }}
+        ></input>
       </div>
+      {error && <div style={{ color: "red" }}>{error.password}</div>}
       <button className="button" type="submit">
         Submit
+      </button>{" "}
+      <button
+        className="button"
+        type="reset"
+        onClick={() => setFormData({ email: "", password: "" })}
+      >
+        Reset
       </button>
     </form>
   );
