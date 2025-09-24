@@ -5,9 +5,10 @@ import TestApp from "./components/apps/TestApp/TestApp";
 import FormsApp from "./components/apps/FormsApp/FormsApp";
 import TypeScriptApp from "./components/typescriptapps/TypeScriptApp.tsx";
 import CartApp from "./components/typescriptapps/ShoppingCartApp/CartApp";
+import ApiApp from "./components/apps/ApiApp/ApiApp";
 
 function App() {
-  const [currentApp, setCurrentApp] = useState("shopcart");
+  const [currentApp, setCurrentApp] = useState("apiapp");
 
   const renderApp = () => {
     switch (currentApp) {
@@ -21,8 +22,10 @@ function App() {
         return <TypeScriptApp />;
       case "shopcart":
         return <CartApp />;
+      case "apiapp":
+        return <ApiApp />;
       default:
-        return <CartApp />;
+        return <ApiApp />;
     }
   };
 
@@ -43,6 +46,9 @@ function App() {
         </button>
         <button className="mr-4" onClick={() => setCurrentApp("shopcart")}>
           ShopCart
+        </button>
+        <button className="mr-4" onClick={() => setCurrentApp("apiapp")}>
+          ApiApp
         </button>
       </nav>
       {renderApp()}
