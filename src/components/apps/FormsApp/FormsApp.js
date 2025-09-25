@@ -52,10 +52,11 @@ export default function FormsApp() {
     <form onSubmit={handleSubmit} noValidate>
       {success && <div style={{ color: "green" }}>{success}</div>}
       <div>
-        <label>Email:</label>
+        <label htmlFor="email">Email:</label>
         <input
           className="input-regular"
           required
+          id="email"
           name="email"
           type="email"
           value={formData.email || ""}
@@ -77,10 +78,11 @@ export default function FormsApp() {
       </div>
       {error && <div style={{ color: "red" }}>{error.email}</div>}
       <div>
-        <label>Password:</label>
+        <label htmlFor="password">Password:</label>
         <input
           className="input-regular"
           required
+          id="password"
           name="password"
           type="password"
           value={formData.password || ""}
