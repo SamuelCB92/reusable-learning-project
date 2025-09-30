@@ -29,26 +29,6 @@
 - ✅ Form validation patterns - **COMPLETED**
 - ✅ Project with form validation - **COMPLETED**
 
-#### Outcomes
-
-- Controlled inputs with validation (sync + async)
-- Error, dirty, touched states surfaced clearly in UI
-- Fully accessible forms (labels, describedby, keyboard, focus management)
-- Submit flow with pending state and server-side error handling
-
-#### Acceptance Criteria
-
-- Form is usable without a mouse (tab order, Enter/Space)
-- Invalid state blocks submit and announces errors accessibly
-- Schema validation integrated (Zod or Yup)
-- At least 2 real forms shipped (Login and Checkout)
-
-#### Deliverables
-
-- Reusable Input, Select, Textarea with label/help/error
-- Lightweight form utilities (custom hook or thin wrapper on React Hook Form)
-- One end-to-end form hitting an API, with loading and error states
-
 ### 🔥 Month 5 (November) – API Consumption + Node.js + Express + MongoDB
 
 - API consumption
@@ -56,6 +36,7 @@
 - MongoDB and Mongoose
 - Full CRUD
 - Project with login + CRUD
+- CI/CD pipeline basics in detail
 
 ### 🔥 Month 6 (December) – Next.js + SQL
 

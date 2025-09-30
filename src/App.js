@@ -6,9 +6,10 @@ import FormsApp from "./components/apps/FormsApp/FormsApp";
 import TypeScriptApp from "./components/typescriptapps/TypeScriptApp.tsx";
 import CartApp from "./components/typescriptapps/ShoppingCartApp/CartApp";
 import ApiApp from "./components/apps/ApiApp/ApiApp";
+import ChallengeApp from "./components/apps/ChallengeApp/ChallengeApp";
 
 function App() {
-  const [currentApp, setCurrentApp] = useState("apiapp");
+  const [currentApp, setCurrentApp] = useState("challengeapp");
 
   const renderApp = () => {
     switch (currentApp) {
@@ -24,8 +25,10 @@ function App() {
         return <CartApp />;
       case "apiapp":
         return <ApiApp />;
+      case "challengeapp":
+        return <ChallengeApp />;
       default:
-        return <ApiApp />;
+        return <ChallengeApp />;
     }
   };
 
