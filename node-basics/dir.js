@@ -13,3 +13,5 @@ if (fs.existsSync("new")) {
     console.log("Directory removed");
   });
 }
+//fs.rmdir only works on empty directories. To remove non-empty directories, use fs.rm with { recursive: true }
+//fs.rm("new", { recursive: true }, (err) => { ... });
