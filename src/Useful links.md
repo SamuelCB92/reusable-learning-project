@@ -63,3 +63,7 @@ https://www.youtube.com/watch?v=KSQOPRea-P4(portfolio, 2h)
 https://smoljames.com/roadmap (aspiring programmer roadmap)
 
 https://www.youtube.com/watch?v=rEEHdaRo5mE&t=3s STUDY/WORK playlist
+
+Useful tips:
+
+- shift+alt+a comments block of code
