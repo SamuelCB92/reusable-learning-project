@@ -1,0 +1,13 @@
+2025-10-01 01:59:14	function v4(options, buf, offset) {
+    if (native.randomUUID && !buf && !options) {
+        return native.randomUUID();
+    }
+    return _v4(options, buf, offset);
+}	Log event emitted!
+2025-10-01 02:03:00	function v4(options, buf, offset) {
+    if (native.randomUUID && !buf && !options) {
+        return native.randomUUID();
+    }
+    return _v4(options, buf, offset);
+}	Log event emitted!
+2025-10-01 02:04:13	1a3cd2ea-a696-410b-aacd-29162015ff54	Log event emitted!
