@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const data = {};
-data.employees = require("../../data/employees.json");
+data.employees = require("../../model/employees.json");
 const employeesController = require("../../controllers/employeesController");
 
 // Handle routes for /employees
