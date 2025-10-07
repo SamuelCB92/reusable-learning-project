@@ -3,11 +3,12 @@ const router = express.Router();
 const data = {};
 data.employees = require("../../model/employees.json");
 const employeesController = require("../../controllers/employeesController");
+const verifyJWT = require("../../middleware/verifyJWT");
 
 // Handle routes for /employees
 router
   .route("/")
-  .get(employeesController.getAllEmployees) // Get all employees
+  .get(verifyJWT, employeesController.getAllEmployees) // Get all employees
   .post(employeesController.createNewEmployee) // Create a new employee
   .put(employeesController.updateEmployee) // Update an existing employee
   .delete(employeesController.deleteEmployee); // Delete an employee

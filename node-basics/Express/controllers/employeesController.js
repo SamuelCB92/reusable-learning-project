@@ -53,17 +53,35 @@ const updateEmployee = (req, res) => {
   data.setEmployees(unsortedArray.sort((a, b) => a.id - b.id));
   res.status(200).json(data.employees);
 };
-
+// .put will handle PUT requests to /employees, updating an existing employee at the specified ID
 const deleteEmployee = (req, res) => {
-  res.json({
-    id: req.body.id,
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-  });
+  const employee = data.employees.find(
+    (emp) => emp.id === parseInt(req.body.id)
+  );
+
+  if (!employee) {
+    return res.status(404).json({ message: "Employee not found" });
+  }
+
+  // Remove employee from array
+  const filteredArray = data.employees.filter(
+    (emp) => emp.id !== parseInt(req.body.id)
+  );
+  data.setEmployees(filteredArray);
+
+  res.json(data.employees); // Return the updated employee list
 };
 
 const getEmployee = (req, res) => {
-  res.json({ id: req.params.id });
+  const employee = data.employees.find(
+    (emp) => emp.id === parseInt(req.params.id)
+  );
+
+  if (!employee) {
+    return res.status(404).json({ message: "Employee not found" });
+  }
+
+  res.json(employee);
 };
 
 module.exports = {
