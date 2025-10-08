@@ -77,3 +77,16 @@
 2025-10-06 22:15:02	218c5ce3-fc17-4fe6-a393-acf039b509d3	POST	 undefined	 /auth
 2025-10-06 22:15:25	7d9574f2-5165-4da3-b6da-9e789943d9e4	GET	 undefined	 /employees
 2025-10-06 22:15:41	6c4f0a7e-11a9-4dd8-8fa5-e0a778375a30	GET	 undefined	 /employees
+2025-10-07 00:02:18	4cefbdf6-f67c-4171-9e8d-bfc0d864c004	GET	 undefined	 /
+2025-10-07 00:02:18	a02fa3d7-6a07-4eb6-9bf1-87b18723d5af	GET	 undefined	 /favicon.ico
+2025-10-07 00:08:11	373ce58d-6856-4f29-bdd0-21d052d6ef0c	POST	 undefined	 /auth
+2025-10-07 00:08:41	545e2596-f651-40d0-b324-7fc481ba2428	GET	 undefined	 /employees
+2025-10-07 00:08:56	fcebacbf-c09b-47e6-b8b1-81cbf888c5e9	POST	 undefined	 /employees
+2025-10-07 00:08:59	843c1674-7068-4159-86ae-32237fd8a982	POST	 undefined	 /employees
+2025-10-07 00:10:02	645a8d23-094e-4aa5-83e7-05447848011a	POST	 undefined	 /register
+2025-10-07 00:11:03	4bd93417-73af-43dd-a34c-0534a99db186	POST	 undefined	 /auth
+2025-10-07 00:11:17	4df24683-d1ca-423a-86d9-7838a0df4ebd	POST	 undefined	 /auth
+2025-10-07 00:11:34	750e98f0-1d30-4b2e-b794-71e80ee6ecbe	POST	 undefined	 /employees
+2025-10-07 00:12:01	db27dbce-2e67-42f7-8d98-370a05bd672e	GET	 undefined	 /employees
+2025-10-07 00:12:18	cdf48879-b2ae-4afe-a9d0-ce2e24ae40a7	POST	 undefined	 /auth
+2025-10-07 00:12:32	1d89b5bf-c7ba-46ae-946f-e3e91a1e9b03	DELETE	 undefined	 /employees

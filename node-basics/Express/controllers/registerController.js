@@ -29,8 +29,8 @@ const handleNewUser = async (req, res) => {
 
   // Create new user object
   const newUser = {
-    id: usersDB.users.length + 1,
     username,
+    roles: { User: 2001 }, // Assign default role
     password: hashedPassword,
   };
 

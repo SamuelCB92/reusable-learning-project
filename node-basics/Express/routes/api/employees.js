@@ -4,14 +4,22 @@ const data = {};
 data.employees = require("../../model/employees.json");
 const employeesController = require("../../controllers/employeesController");
 const verifyJWT = require("../../middleware/verifyJWT");
+const ROLES_LIST = require("../../config/roles_list");
+const verifyRoles = require("../../middleware/verifyRoles");
 
 // Handle routes for /employees
 router
   .route("/")
-  .get(verifyJWT, employeesController.getAllEmployees) // Get all employees
-  .post(employeesController.createNewEmployee) // Create a new employee
-  .put(employeesController.updateEmployee) // Update an existing employee
-  .delete(employeesController.deleteEmployee); // Delete an employee
+  .get(employeesController.getAllEmployees) // Get all employees
+  .post(
+    verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),
+    employeesController.createNewEmployee
+  ) // Create a new employee
+  .put(
+    verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),
+    employeesController.updateEmployee
+  ) // Update an existing employee
+  .delete(verifyRoles(ROLES_LIST.Admin), employeesController.deleteEmployee); // Delete an employee
 // Handle routes for /employees/:id
 router.route("/:id").get(employeesController.getEmployee); // Get a specific employee by ID
 
